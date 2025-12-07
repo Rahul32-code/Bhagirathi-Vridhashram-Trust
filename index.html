@@ -77,7 +77,8 @@
                     <a class="navbar-brand" href="index.html">
                         <img src="assets/images/Logo_bhagirath_trust.png" class="main-logo" alt="logo"
                             style="width: 100px; height: auto;">
-                        <!-- <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"> -->
+                        <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"
+                            style="width: 100px; height: auto;">
                     </a>
                 </div>
 
@@ -636,7 +637,7 @@
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact5.png" alt="fun-fact">
                         <h2><span class="counter">150</span>+</h2>
-                        <p class="text-secondary">Successful Cases</p>
+                        <p>Successful Cases</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6" data-cue="slideInUp" data-duration="900" data-show="true"
@@ -645,7 +646,7 @@
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact6.png" alt="fun-fact">
                         <h2><span class="counter">23K</span>+</h2>
-                        <p class="text-secondary">Happy Customers</p>
+                        <p>Happy Customers</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6" data-cue="slideInUp" data-duration="900" data-show="true"
@@ -654,7 +655,7 @@
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact7.png" alt="fun-fact">
                         <h2><span class="counter">24</span>/7</h2>
-                        <p class="text-secondary">Customer Support</p>
+                        <p>Customer Support</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6" data-cue="slideInUp" data-duration="900" data-show="true"
@@ -663,7 +664,7 @@
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact8.png" alt="fun-fact">
                         <h2><span class="counter">24</span>%</h2>
-                        <p class="text-secondary">Positive Review</p>
+                        <p>Positive Review</p>
                     </div>
                 </div>
             </div>
@@ -732,23 +733,33 @@
                                     </li>
                                 </ul>
 
-                                <div class="about-btn d-flex flex-wrap align-items-center">
+                                <div class="about-btn d-flex flex-wrap align-items-center gap-3">
+
+                                    <!-- More About Us Button -->
                                     <a href="#" class="default-btn">
-                                        <div class="d-flex align-items-center gap-10">
+                                        <div class="d-flex align-items-center gap-2">
                                             <span>More About Us</span>
                                             <img src="assets/images/right-white.svg" alt="right-white">
                                         </div>
                                     </a>
-                                    <div class="flex-shrink-0">
-                                        <i class="ti ti-mail-opened"></i>
+
+                                    <!-- Mail Us -->
+                                    <div
+                                        class="d-flex align-items-center mail-us text-decoration-none flex-grow-1 flex-wrap">
+                                        <div class="flex-shrink-0 me-2">
+                                            <i class="ti ti-mail-opened"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <span class="d-block fs-6 fs-sm-5 fw-semibold">Mail Us</span>
+                                            <a href="mailto:support@bhagirathitrust.org"
+                                                class="d-block text-break fs-6 fs-sm-5 text-semibold  text-decoration-none">
+                                                support@bhagirathitrust.org
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <span class="d-block">Mail Us</span>
-                                        <span class="mail"><span class="__cf_email__"
-                                                data-cfemail="355d5059455a595150475a755258545c591b565a58">support@bhagirathitrust.org</span></span>
-                                    </div>
-                                    </a>
+
                                 </div>
+
                             </div>
                             <div class="col-lg-4">
                                 <div class="team-member text-center">
@@ -1342,7 +1353,7 @@
     <!-- End Testimonial Area -->
 
     <!-- Start Bhagirathi Vridhashram Trust Information Area -->
-    <div class="Bhagirathi Vridhashram Trust-information-area bg-img ptb-100"
+    <!-- <div class="Bhagirathi Vridhashram Trust-information-area bg-img ptb-100"
         style="background-image: url(assets/images/information-bg.jpg);">
         <div class="container mw-1685">
             <div class="row align-items-center g-4" data-cues="slideInUp" data-duration="900" data-disabled="true">
@@ -1373,6 +1384,35 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="py-5" style="background: linear-gradient(135deg, #0d3b84, #1a61b2);">
+        <div class="container">
+            <div class="row align-items-center g-4">
+
+                <!-- LEFT: Donation QR / Image -->
+                <div class="col-12 col-md-6 d-flex justify-content-center order-1 order-md-1">
+                    <div class="bg-white rounded shadow-lg" style="max-width: 400px; width: 100%;">
+                        <img src="assets/images/donation-box.webp" class="img-fluid rounded" alt="Donate QR">
+                    </div>
+                </div>
+
+                <!-- RIGHT: Text + Button -->
+                <div class="col-12 col-md-6 text-white order-2 order-md-2 text-center text-md-start">
+
+                    <!-- Heading -->
+                    <h2 class="fw-bold mb-3" style="font-family: 'Segoe UI', sans-serif;">
+                        Support Bhagirathi Vridhashram Trust
+                    </h2>
+
+                    <!-- Description -->
+                    <p class="mb-4 fs-3 fs-md-5 opacity-75" style="line-height: 1.6;">
+                        All donations to Support Bhagirathi Vridhashram Trust are 50% Tax Exempt under Section 80G of the Income Tax Act, 1961.
+                    </p>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -1918,6 +1958,36 @@
         </div>
     </div>
     <!-- End RTL & Dark Switch Area -->
+
+    <!-- start Donate btn -->
+<!-- <a href="#"
+   class="position-fixed top-50 start-0 translate-middle-y"
+   style="
+      writing-mode: vertical-lr;        /* bottom to top vertical */
+      text-orientation: mixed;          /* letters normal */
+      padding-right: 10px;
+      padding-left: 10px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      border-bottom-right-radius: 15px;
+      border-top-right-radius: 15px;
+      font-size: 28px;
+      font-weight: 700;
+      color: black;
+      background: #f2b679;
+      text-decoration: none;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+      flex-direction: column;
+      z-index: 1;
+   ">
+    Donate Now
+</a> -->
+
+
+
+    <!-- end Donate btn -->
 
     <!-- Link Of JS File -->
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
