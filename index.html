@@ -309,7 +309,7 @@
                     </div>
                     <a href="" class="default-btn active">
                         <div class="d-flex align-items-center gap-10">
-                            <span class="d-none d-sm-inline-block">Donate Now</span>
+                            <span class="d-none d-sm-inline-block">Magazine</span>
                             <img src="assets/images/right.svg" alt="right-white">
                         </div>
                     </a>
@@ -1394,7 +1394,7 @@
                 <!-- LEFT: Donation QR / Image -->
                 <div class="col-12 col-md-6 d-flex justify-content-center order-1 order-md-1">
                     <div class="bg-white rounded shadow-lg" style="max-width: 400px; width: 100%;">
-                        <img src="assets/images/donation-box.webp" class="img-fluid rounded" alt="Donate QR">
+                        <img src="assets/images/donation-box.png" class="img-fluid rounded" alt="Donate QR">
                     </div>
                 </div>
 
@@ -1402,13 +1402,14 @@
                 <div class="col-12 col-md-6 text-white order-2 order-md-2 text-center text-md-start">
 
                     <!-- Heading -->
-                    <h2 class="fw-bold mb-3" style="font-family: 'Segoe UI', sans-serif;">
+                    <h2 class="fw-bold mb-3 text-white">
                         Support Bhagirathi Vridhashram Trust
                     </h2>
 
                     <!-- Description -->
                     <p class="mb-4 fs-3 fs-md-5 opacity-75" style="line-height: 1.6;">
-                        All donations to Support Bhagirathi Vridhashram Trust are 50% Tax Exempt under Section 80G of the Income Tax Act, 1961.
+                        All donations to Support Bhagirathi Vridhashram Trust are 50% Tax Exempt under Section 80G of
+                        the Income Tax Act, 1961.
                     </p>
 
                 </div>
@@ -1943,9 +1944,102 @@
 
                 <div class="settings-box">
                     <!-- Start switch Area -->
-                    <!-- <div class="settings-btn rtl-btn">
-                            <button id="rtlToggleBtn" class="bg-transparent border-0 text-white">Switch To RTL</button>
-                        </div> -->
+                    <!-- <style>
+                        .goog-te-gadget .goog-te-menu-value span:first-child {
+                            display: none !important;
+                        }
+                        .goog-te-gadget img {
+                            display: none !important;
+                        }
+                        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+                            visibility: hidden !important;
+                            height: 0 !important;
+                            overflow: hidden !important;
+                        }
+                    </style>
+
+                    <div class="settings-btn rtl-btn" id="google_translate_element"></div>
+
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',       
+                                includedLanguages: 'en,hi',
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                            }, 'google_translate_element');
+                        }
+                    </script>
+
+                    <script type="text/javascript"
+                        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+
+                        <!-- <style>
+
+  #google_translate_element {
+    display: none !important;
+  }
+
+  #toggleLangBtn {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4292c8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+  #toggleLangBtn:hover {
+    background-color: #4292c8;
+  }
+  .VIpgJd-ZVi9od-ORHb-OEVmcd {
+        display: none;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
+</style>
+
+<div id="google_translate_element"></div>
+
+<button id="toggleLangBtn">Loading...</button>
+
+<script>
+  function setTranslateLang(lang) {
+    document.cookie = "googtrans=/en/" + lang + ";path=/;domain=" + location.hostname + ";max-age=" + 60*60*24*30;
+    location.reload();
+  }
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+
+  function getCurrentLang() {
+    const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+    return match ? match[1] : 'en'; 
+  }
+
+  function updateToggleButton() {
+    const lang = getCurrentLang();
+    const toggleBtn = document.getElementById('toggleLangBtn');
+    toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+  }
+
+  window.addEventListener('DOMContentLoaded', updateToggleButton);
+
+  document.getElementById('toggleLangBtn').addEventListener('click', function() {
+    const currentLang = getCurrentLang();
+    const newLang = (currentLang === 'en') ? 'hi' : 'en';
+    setTranslateLang(newLang);
+  });
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+
+
+
                     <!-- End switch Area -->
 
                     <!-- Start Dark Mode Area -->
@@ -1960,32 +2054,94 @@
     <!-- End RTL & Dark Switch Area -->
 
     <!-- start Donate btn -->
-<!-- <a href="#"
-   class="position-fixed top-50 start-0 translate-middle-y"
-   style="
-      writing-mode: vertical-lr;        /* bottom to top vertical */
-      text-orientation: mixed;          /* letters normal */
-      padding-right: 10px;
-      padding-left: 10px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      border-bottom-right-radius: 15px;
-      border-top-right-radius: 15px;
-      font-size: 28px;
-      font-weight: 700;
-      color: black;
-      background: #f2b679;
-      text-decoration: none;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      gap: 0.2em;
-      flex-direction: column;
-      z-index: 1;
-   ">
-    Donate Now
-</a> -->
+    <a href="#" class="donate-btn">
+        Donate Now
+    </a>
 
+    <style>
+        .donate-btn {
+            position: fixed;
+            top: 60%;
+            right: 0;
+            transform: translateY(-50%) rotate(180deg);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
 
+            background: #f2b679;
+            color: black;
+            font-weight: 600;
+            text-decoration: none;
+
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+
+            width: 60px;
+            height: 210px;
+            font-size: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+
+            box-shadow: 0 0 8px rgba(255, 165, 0, 0.6);
+            /* base glow */
+            animation: softGlow 2s infinite ease-in-out;
+            /* glowing animation */
+        }
+
+        /* Hover Glow Boost */
+        .donate-btn:hover {
+            background: #4292c8;
+            color: #fff;
+            box-shadow: 0 0 14px rgba(66, 146, 200, 0.9),
+                0 0 24px rgba(66, 146, 200, 0.7);
+        }
+
+        /* Soft Pulse Glow Animation */
+        @keyframes softGlow {
+            0% {
+                box-shadow: 0 0 6px rgba(255, 165, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 14px rgba(255, 165, 0, 0.9);
+            }
+
+            100% {
+                box-shadow: 0 0 6px rgba(255, 165, 0, 0.5);
+            }
+        }
+
+        /* ⭐ Tablet */
+        @media (max-width: 992px) {
+            .donate-btn {
+                width: 55px;
+                height: 180px;
+                font-size: 20px;
+            }
+        }
+
+        /* ⭐ Mobile Landscape */
+        @media (max-width: 768px) {
+            .donate-btn {
+                width: 50px;
+                height: 160px;
+                font-size: 18px;
+            }
+        }
+
+        /* ⭐ Mobile Portrait */
+        @media (max-width: 480px) {
+            .donate-btn {
+                width: 45px;
+                height: 140px;
+                font-size: 16px;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+        }
+    </style>
 
     <!-- end Donate btn -->
 
@@ -1998,6 +2154,8 @@
     <script src="assets/js/ukiyo.min.js"></script>
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/custom.js"></script>
+
+
 </body>
 
 </html>

@@ -13597,7 +13597,7 @@ html[class="rtl"] .swiper .swiper-slide * {
 ============================================*/
 .settings-btn-wrap {
   position: fixed;
-  top: 50%;
+  top: 30%;
   right: -138px;
   transform: translateY(-50%);
   z-index: 3;
