@@ -121,13 +121,13 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="our-member.html">
-                                    Our Members
+                                <a class="dropdown-item" href="our-founder.html">
+                                    Our Founder
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    Trustee
+                                <a class="dropdown-item" href="our-trustee.html">
+                                    Our Trustee & Members
                                 </a>
                             </li>
                         </ul>
@@ -308,9 +308,9 @@
                             <img src="assets/images/icon-search2.svg" alt="icon-search2">
                         </button> -->
                 </div>
-                <a href="" class="default-btn active">
+                <a href="assets/pdf/chetana.pdf" class="default-btn active">
                     <div class="d-flex align-items-center gap-10">
-                        <span class="d-none d-sm-inline-block">Donate Now</span>
+                        <span class="d-none d-sm-inline-block">Magazine</span>
                         <img src="assets/images/right.svg" alt="right-white">
                     </div>
                 </a>
@@ -326,7 +326,6 @@
         </div>
     </nav>
     <!-- End Navbar Area -->
-    </div>
 
     <!-- Start Mobile Navbar Area -->
     <div class="mobile-navbar offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasExample">
@@ -365,13 +364,13 @@
 
                     <ul class="mobile-menu-items">
                         <li>
-                            <a class="dropdown-item" href="our-member.html">
-                                Our Members
+                            <a class="dropdown-item" href="our-founder.html">
+                                Our Founders
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="our-truste.html">
-                                Trustee
+                            <a class="dropdown-item" href="our-trustee.html">
+                                Our Trustee & Members
                             </a>
                         </li>
                     </ul>
@@ -529,8 +528,8 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="mb-60">
-                        <h2 class="main-title ms-auto mw-975">Welcome to  <span
-                                class="word-mark"> Bhagirathi </span> Vridhashram Trust</h2>
+                        <h2 class="main-title ms-auto mw-975">Welcome to <span class="word-mark"> Bhagirathi </span>
+                            Vridhashram Trust</h2>
                     </div>
                 </div>
             </div>
@@ -545,8 +544,10 @@
                 <div class="col-xl-8">
                     <div class="about-content" data-cues="slideInUp" data-duration="900">
                         <p>
-                        Founded in 2009, <strong>Bhagirathi Vridhashram Trust</strong> is dedicated to providing care, dignity, and love to senior citizens. We strive to create a supportive environment for the elderly who are needy or homeless.
-                    </p>
+                            Founded in 2009, <strong>Bhagirathi Vridhashram Trust</strong> is dedicated to providing
+                            care, dignity, and love to senior citizens. We strive to create a supportive environment for
+                            the elderly who are needy or homeless.
+                        </p>
 
 
                         <div class="row g-4 align-items-end">
@@ -560,8 +561,10 @@
                                     <div class="flex-grow-1">
                                         <h3>Maintaining Independence</h3>
                                         <p>
-                                        We organize Yoga and meditation programs for people from various sectors such as corporate, government, and police, helping uplift moral values and promote a caring society.
-                                    </p>
+                                            We organize Yoga and meditation programs for people from various sectors
+                                            such as corporate, government, and police, helping uplift moral values and
+                                            promote a caring society.
+                                        </p>
                                     </div>
                                 </div>
 
@@ -1272,10 +1275,10 @@
                         </a>
                     </li>
                 </ul>
-                <!-- <div class="d-flex flex-wrap gap-5 policy">
-                        <a href="privacy-policy.html" class="text-decoration-none">Privacy Policy</a>
-                        <a href="terms-conditions.html" class="text-decoration-none">Terms & Conditions</a>
-                    </div> -->
+                <div class="d-flex flex-wrap gap-5 policy">
+                    <a href="privacy-policy.html" class="text-decoration-none">Privacy Policy</a>
+                    <a href="terms-conditions.html" class="text-decoration-none">Terms & Conditions</a>
+                </div>
             </div>
         </div>
     </div>
@@ -1297,9 +1300,8 @@
 
                 <div class="settings-box">
                     <!-- Start switch Area -->
-                    <!-- <div class="settings-btn rtl-btn">
-                            <button id="rtlToggleBtn" class="bg-transparent border-0 text-white">Switch To RTL</button>
-                        </div> -->
+
+                    <button class="settings-btn rtl-btn" id="toggleLangBtn">Loading...</button>
                     <!-- End switch Area -->
 
                     <!-- Start Dark Mode Area -->
@@ -1313,6 +1315,15 @@
     </div>
     <!-- End RTL & Dark Switch Area -->
 
+    <!-- start Donate btn -->
+    <a href="donate.html" class="donate-btn">
+        Donate Now
+    </a>
+
+
+
+    <!-- end Donate btn -->
+
     <!-- Link Of JS File -->
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -1322,6 +1333,41 @@
     <script src="assets/js/ukiyo.min.js"></script>
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+        function setTranslateLang(lang) {
+            document.cookie = "googtrans=/en/" + lang + ";path=/;domain=" + location.hostname + ";max-age=" + 60 * 60 * 24 * 30;
+            location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        function getCurrentLang() {
+            const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+            return match ? match[1] : 'en';
+        }
+
+        function updateToggleButton() {
+            const lang = getCurrentLang();
+            const toggleBtn = document.getElementById('toggleLangBtn');
+            toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+        }
+
+        window.addEventListener('DOMContentLoaded', updateToggleButton);
+
+        document.getElementById('toggleLangBtn').addEventListener('click', function () {
+            const currentLang = getCurrentLang();
+            const newLang = (currentLang === 'en') ? 'hi' : 'en';
+            setTranslateLang(newLang);
+        });
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 <!-- Mirrored from templates.hibootstrap.com/Bhagirathi Vridhashram Trust/about-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 05 Dec 2025 04:42:29 GMT -->

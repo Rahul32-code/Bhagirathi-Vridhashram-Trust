@@ -18,44 +18,7 @@
     <link rel="icon" type="image/png" href="assets/images/Logo_bhagirath_trust.png">
     <!-- Title -->
     <title>Bhagirathi Vridhashram Trust - Elderly Home & Senior Care HTML Template</title>
-    <style>
-        .masonry {
-            column-count: 3;
-            column-gap: 20px;
-        }
-
-        @media (max-width: 992px) {
-            .masonry {
-                column-count: 2;
-                /* For medium screens, 2 columns */
-            }
-        }
-
-        @media (max-width: 576px) {
-            .masonry {
-                column-count: 2;
-                /* For small screens, 2 columns */
-            }
-        }
-
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .masonry-item img {
-            width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Hover effect */
-        .masonry-item:hover img {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -116,7 +79,8 @@
                 <a class="navbar-brand" href="index.html">
                     <img src="assets/images/Logo_bhagirath_trust.png" class="main-logo" alt="logo"
                         style="width: 100px; height: auto;">
-                    <!-- <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"> -->
+                    <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"
+                        style="width: 100px; height: auto;">
                 </a>
             </div>
 
@@ -158,13 +122,13 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="our-member.html">
-                                    Our Members
+                                <a class="dropdown-item" href="our-founder.html">
+                                    Our Founder
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    Trustee
+                                <a class="dropdown-item" href="our-trustee.html">
+                                    Our Trustee & Members
                                 </a>
                             </li>
                         </ul>
@@ -345,9 +309,9 @@
                             <img src="assets/images/icon-search2.svg" alt="icon-search2">
                         </button> -->
                 </div>
-                <a href="" class="default-btn active">
+                <a href="assets/pdf/chetana.pdf" class="default-btn active">
                     <div class="d-flex align-items-center gap-10">
-                        <span class="d-none d-sm-inline-block">Donate Now</span>
+                        <span class="d-none d-sm-inline-block">Magazine</span>
                         <img src="assets/images/right.svg" alt="right-white">
                     </div>
                 </a>
@@ -363,7 +327,6 @@
         </div>
     </nav>
     <!-- End Navbar Area -->
-    </div>
 
     <!-- Start Mobile Navbar Area -->
     <div class="mobile-navbar offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasExample">
@@ -402,13 +365,13 @@
 
                     <ul class="mobile-menu-items">
                         <li>
-                            <a class="dropdown-item" href="our-member.html">
-                                Our Members
+                            <a class="dropdown-item" href="our-founder.html">
+                                Our Founders
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="our-truste.html">
-                                Trustee
+                            <a class="dropdown-item" href="our-trustee.html">
+                                Our Trustee & Members
                             </a>
                         </li>
                     </ul>
@@ -558,9 +521,38 @@
     <!-- End Page Banner Area -->
 
     <!-- Start Gallery Area -->
-    <div class="gallery-area ptb-120">
-        <div class="container mw-1685">
+    <div class="gallery-area ptb-100">
+        <div class="container pb-5">
+            <!-- Get Involved Section -->
+            <div class="row">
+                <div class="col-lg-4" data-cue="slideInUp" data-duration="900" data-show="true"
+                    style="animation-name: slideInUp; animation-duration: 900ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                    <span class="top-title">Get Involved</span>
+                </div>
+            </div>
 
+            <div class="row align-items-start">
+                <div class="col-md-6 mb-4">
+                    <h2 class="display-4">Join Us In Making A Difference!</h2>
+                    <p class="lead">Together, we can spread kindness, care, and hope to those who need it most.</p>
+                </div>
+                <div class="col-md-6 text-center">
+                    <!-- Embed YouTube video -->
+                    <iframe width="100%" height="315"
+                        src="https://www.youtube.com/embed/ydEDpCpQaAs?si=FbPkFnpw3ggZCIRK&amp;start=2"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mw-1685">
+            <div class="col-lg-4" data-cue="slideInUp" data-duration="900" data-show="true"
+                style="animation-name: slideInUp; animation-duration: 900ms; animation-timing-function: ease; animation-delay: 0ms; animation-direction: normal; animation-fill-mode: both;">
+                <span class="top-title">Gallery</span>
+            </div>
             <div class="masonry">
 
                 <a href="assets/images/gallery1.jpg" class="masonry-item d-block" data-fslightbox="1">
@@ -742,10 +734,10 @@
                         </a>
                     </li>
                 </ul>
-                <!-- <div class="d-flex flex-wrap gap-5 policy">
+                <div class="d-flex flex-wrap gap-5 policy">
                         <a href="privacy-policy.html" class="text-decoration-none">Privacy Policy</a>
                         <a href="terms-conditions.html" class="text-decoration-none">Terms & Conditions</a>
-                    </div> -->
+                    </div>
             </div>
         </div>
     </div>
@@ -767,9 +759,8 @@
 
                 <div class="settings-box">
                     <!-- Start switch Area -->
-                    <!-- <div class="settings-btn rtl-btn">
-                            <button id="rtlToggleBtn" class="bg-transparent border-0 text-white">Switch To RTL</button>
-                        </div> -->
+
+                    <button class="settings-btn rtl-btn" id="toggleLangBtn">Loading...</button>
                     <!-- End switch Area -->
 
                     <!-- Start Dark Mode Area -->
@@ -783,6 +774,15 @@
     </div>
     <!-- End RTL & Dark Switch Area -->
 
+    <!-- start Donate btn -->
+    <a href="#" class="donate-btn">
+        Donate Now
+    </a>
+
+    
+
+    <!-- end Donate btn -->
+
     <!-- Link Of JS File -->
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -792,6 +792,41 @@
     <script src="assets/js/ukiyo.min.js"></script>
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+        function setTranslateLang(lang) {
+            document.cookie = "googtrans=/en/" + lang + ";path=/;domain=" + location.hostname + ";max-age=" + 60 * 60 * 24 * 30;
+            location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        function getCurrentLang() {
+            const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+            return match ? match[1] : 'en';
+        }
+
+        function updateToggleButton() {
+            const lang = getCurrentLang();
+            const toggleBtn = document.getElementById('toggleLangBtn');
+            toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+        }
+
+        window.addEventListener('DOMContentLoaded', updateToggleButton);
+
+        document.getElementById('toggleLangBtn').addEventListener('click', function () {
+            const currentLang = getCurrentLang();
+            const newLang = (currentLang === 'en') ? 'hi' : 'en';
+            setTranslateLang(newLang);
+        });
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 <!-- Mirrored from templates.hibootstrap.com/Bhagirathi Vridhashram Trust/gallery.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 05 Dec 2025 04:43:13 GMT -->

@@ -78,7 +78,8 @@
                 <a class="navbar-brand" href="index.html">
                     <img src="assets/images/Logo_bhagirath_trust.png" class="main-logo" alt="logo"
                         style="width: 100px; height: auto;">
-                    <!-- <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"> -->
+                    <img src="assets/images/Logo_bhagirath_trust.png" class="white-logo" alt="white-logo"
+                        style="width: 100px; height: auto;">
                 </a>
             </div>
 
@@ -120,13 +121,13 @@
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="our-member.html">
-                                    Our Members
+                                <a class="dropdown-item" href="our-founder.html">
+                                    Our Founder
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    Trustee
+                                <a class="dropdown-item" href="our-trustee.html">
+                                    Our Trustee & Members
                                 </a>
                             </li>
                         </ul>
@@ -307,9 +308,9 @@
                             <img src="assets/images/icon-search2.svg" alt="icon-search2">
                         </button> -->
                 </div>
-                <a href="" class="default-btn active">
+                <a href="assets/pdf/chetana.pdf" class="default-btn active">
                     <div class="d-flex align-items-center gap-10">
-                        <span class="d-none d-sm-inline-block">Donate Now</span>
+                        <span class="d-none d-sm-inline-block">Magazine</span>
                         <img src="assets/images/right.svg" alt="right-white">
                     </div>
                 </a>
@@ -325,7 +326,6 @@
         </div>
     </nav>
     <!-- End Navbar Area -->
-    </div>
 
     <!-- Start Mobile Navbar Area -->
     <div class="mobile-navbar offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasExample">
@@ -364,13 +364,13 @@
 
                     <ul class="mobile-menu-items">
                         <li>
-                            <a class="dropdown-item" href="our-member.html">
-                                Our Members
+                            <a class="dropdown-item" href="our-founder.html">
+                                Our Founders
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="our-truste.html">
-                                Trustee
+                            <a class="dropdown-item" href="our-trustee.html">
+                                Our Trustee & Members
                             </a>
                         </li>
                     </ul>
@@ -573,13 +573,16 @@
                             <li><i class="ti ti-phone-call"></i> +91 9891329795</li>
                             <li><i class="ti ti-message"></i> support@bhagirathitrust.org</li>
                             <li class="d-flex align-items-center gap-10 social-link">
-                                <a href="https://www.facebook.com/profile.php?id=61581365741099" target="_blank" class="text-decoration-none">
+                                <a href="https://www.facebook.com/profile.php?id=61581365741099" target="_blank"
+                                    class="text-decoration-none">
                                     <i class="ti ti-brand-facebook-filled"></i>
                                 </a>
-                                <a href="https://www.instagram.com/bhagirathi_vridh_ashram/" target="_blank" class="text-decoration-none">
+                                <a href="https://www.instagram.com/bhagirathi_vridh_ashram/" target="_blank"
+                                    class="text-decoration-none">
                                     <i class="ti ti-brand-instagram"></i>
                                 </a>
-                                <a href="https://youtube.com/@bhagirathiashram?si=xIhoT6F76Qc__ehP" target="_blank" class="text-decoration-none">
+                                <a href="https://youtube.com/@bhagirathiashram?si=xIhoT6F76Qc__ehP" target="_blank"
+                                    class="text-decoration-none">
                                     <i class="ti ti-brand-youtube"></i>
                                 </a>
                             </li>
@@ -744,10 +747,10 @@
                         </a>
                     </li>
                 </ul>
-                <!-- <div class="d-flex flex-wrap gap-5 policy">
-                        <a href="privacy-policy.html" class="text-decoration-none">Privacy Policy</a>
-                        <a href="terms-conditions.html" class="text-decoration-none">Terms & Conditions</a>
-                    </div> -->
+                <div class="d-flex flex-wrap gap-5 policy">
+                    <a href="privacy-policy.html" class="text-decoration-none">Privacy Policy</a>
+                    <a href="terms-conditions.html" class="text-decoration-none">Terms & Conditions</a>
+                </div>
             </div>
         </div>
     </div>
@@ -769,9 +772,8 @@
 
                 <div class="settings-box">
                     <!-- Start switch Area -->
-                    <!-- <div class="settings-btn rtl-btn">
-                            <button id="rtlToggleBtn" class="bg-transparent border-0 text-white">Switch To RTL</button>
-                        </div> -->
+
+                    <button class="settings-btn rtl-btn" id="toggleLangBtn">Loading...</button>
                     <!-- End switch Area -->
 
                     <!-- Start Dark Mode Area -->
@@ -785,6 +787,15 @@
     </div>
     <!-- End RTL & Dark Switch Area -->
 
+    <!-- start Donate btn -->
+    <a href="donate.html" class="donate-btn">
+        Donate Now
+    </a>
+
+
+
+    <!-- end Donate btn -->
+
     <!-- Link Of JS File -->
     <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -794,6 +805,41 @@
     <script src="assets/js/ukiyo.min.js"></script>
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/custom.js"></script>
+    <script>
+        function setTranslateLang(lang) {
+            document.cookie = "googtrans=/en/" + lang + ";path=/;domain=" + location.hostname + ";max-age=" + 60 * 60 * 24 * 30;
+            location.reload();
+        }
+
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+
+        function getCurrentLang() {
+            const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+            return match ? match[1] : 'en';
+        }
+
+        function updateToggleButton() {
+            const lang = getCurrentLang();
+            const toggleBtn = document.getElementById('toggleLangBtn');
+            toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+        }
+
+        window.addEventListener('DOMContentLoaded', updateToggleButton);
+
+        document.getElementById('toggleLangBtn').addEventListener('click', function () {
+            const currentLang = getCurrentLang();
+            const newLang = (currentLang === 'en') ? 'hi' : 'en';
+            setTranslateLang(newLang);
+        });
+    </script>
+
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 <!-- Mirrored from templates.hibootstrap.com/Bhagirathi Vridhashram Trust/contact-us.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 05 Dec 2025 04:43:20 GMT -->
