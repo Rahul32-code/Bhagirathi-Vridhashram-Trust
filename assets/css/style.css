@@ -15768,9 +15768,9 @@ Page-navigation Area Style
 .work-single-item:hover .icon {
   background-color: #4292c8;
 }
-.work-single-item:hover .icon img {
+/* .work-single-item:hover .icon img {
   filter: brightness(100);
-}
+} */
 
 .less-show-btn {
   color: #4292c8;
