@@ -17100,7 +17100,7 @@ Page-navigation Area Style
   height: 80px;
   border-radius: 80px;
   transition: all ease 0.5s;
-  background-color: #4292c8;
+  border: 1px solid #4292c8;
   margin-bottom: 30px;
 }
 .why-choose-us-single-item h3,
