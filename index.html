@@ -1958,7 +1958,6 @@
     <!-- end Donate btn -->
 
     <!-- Link Of JS File -->
-    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/swiper-bundle.min.js"></script>
     <script src="assets/js/scrollCue.min.js"></script>
@@ -2140,6 +2139,13 @@
         eraseCookie(name, location.hostname);
         eraseCookie(name, "." + location.hostname);
 
+        // Check if we are switching to English, then clear all cookies
+        if (lang === "en") {
+            // Erase any session-based cookie for googtrans (if switching to English)
+            eraseCookie(name, location.hostname);  // Erase for current domain
+            eraseCookie(name, "." + location.hostname);  // Erase for subdomain
+        }
+
         // Set the correct cookie for the domain and subdomain
         document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;  // Cookie for current domain
         document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`; // Cookie for subdomain
@@ -2209,8 +2215,9 @@
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
+
 <!-- Include the Google Translate API -->
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
 
 
