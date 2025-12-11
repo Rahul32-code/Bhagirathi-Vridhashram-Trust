@@ -44,11 +44,11 @@
                     </div>
                     <div class="col-lg-4">
                         <div
-                            class="d-flex link-social-wrap align-items-center justify-content-center justify-content-lg-end">
-                            <!-- <div class="d-flex link">
-                                        <a href="#">Testimonials</a>
-                                        <a href="#">FAQ</a>
-                                    </div> -->
+                            class="d-flex link-social-wrap align-items-center justify-content-between justify-content-lg-end gap-4">
+                            <div class="d-flex link">
+                                <!-- <a href="#">Testimonials</a> -->
+                                <a href="faqs.html">FAQ</a>
+                            </div>
                             <div class="social-link d-flex align-items-center">
                                 <a href="https://www.facebook.com/profile.php?id=61581365741099" target="_blank">
                                     <i class="ti ti-brand-facebook"></i>
@@ -633,7 +633,7 @@
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact6.png" alt="fun-fact">
                         <h2><span class="counter">23 </span>K</h2>
-                     <p>Happy Customers</p>
+                        <p>Happy Customers</p>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6" data-cue="slideInUp" data-duration="900" data-show="true"
@@ -641,7 +641,7 @@
                     <div
                         class="fun-fact-single-item d-flex justify-content-center align-items-center border-0 p-0 style-two">
                         <img src="assets/images/icon/fun-fact7.png" alt="fun-fact">
-                        <h2><span class="counter">24</span>/7</h2>
+                        <h2><span class="counter">24</span>/<span class="counter">7</span></h2>
                         <p>Customer Support</p>
                     </div>
                 </div>
@@ -1827,22 +1827,22 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
-                        <div class="footer-single-widget">
-                            <h3>More Information</h3>
+                    <div class="footer-single-widget">
+                        <h3>More Information</h3>
 
-                            <ul class="import-link p-0 m-0 list-unstyled">
-                                <li>
-                                    <a href="news.html">News</a>
-                                </li>
-                                <li>
-                                    <a href="privacy-policy.html">Privacy Policy</a>
-                                </li>
-                                <li>
-                                    <a href="terms-conditions.html">Terms & Condition</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul class="import-link p-0 m-0 list-unstyled">
+                            <li>
+                                <a href="news.html">News</a>
+                            </li>
+                            <li>
+                                <a href="privacy-policy.html">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="terms-conditions.html">Terms & Condition</a>
+                            </li>
+                        </ul>
                     </div>
+                </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-single-widget newsletter-form">
                         <h3>Subscribe Newsletter</h3>
@@ -1950,7 +1950,7 @@
     <script src="assets/js/ukiyo.min.js"></script>
     <script src="assets/js/lenis.js"></script>
     <script src="assets/js/custom.js"></script>
-    <script>
+    <!-- <script>
         function setTranslateLang(lang) {
             document.cookie = "googtrans=/en/" + lang + ";path=/;domain=" + location.hostname + ";max-age=" + 60 * 60 * 24 * 30;
             location.reload();
@@ -1982,9 +1982,87 @@
             const newLang = (currentLang === 'en') ? 'hi' : 'en';
             setTranslateLang(newLang);
         });
-    </script>
+    </script> -->
+
+    <script>
+function setTranslateLang(lang) {
+    const val = "/en/" + lang;
+
+    document.cookie = `googtrans=${val};path=/;domain=${location.hostname};max-age=${60*60*24*30}`;
+    document.cookie = `googtrans=${val};path=/;domain=.${location.hostname};max-age=${60*60*24*30}`;
+
+    location.reload();
+}
+
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
+
+function getCurrentLang() {
+    const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+    return match ? match[1] : 'en';
+}
+
+function updateToggleButton() {
+    const lang = getCurrentLang();
+    const toggleBtn = document.getElementById('toggleLangBtn');
+    if (toggleBtn) toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+}
+
+window.addEventListener('DOMContentLoaded', updateToggleButton);
+
+document.getElementById('toggleLangBtn').addEventListener('click', function () {
+    const currentLang = getCurrentLang();
+    const newLang = (currentLang === 'en') ? 'hi' : 'en';
+    setTranslateLang(newLang);
+});
+</script>
+
 
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        function getCookie(name) {
+            const cookies = document.cookie.split("; ");
+            for (let c of cookies) {
+                const [key, value] = c.split("=");
+                if (key === name) return decodeURIComponent(value);
+            }
+            return null;
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const settingsWrap = document.querySelector(".settings-btn-wrap");
+            console.log("Settings Wrap Element:", settingsWrap);
+
+            if (!settingsWrap) {
+                console.warn("⚠ .settings-btn-wrap not found in DOM!");
+                return;
+            }
+
+            const langCookie = getCookie("googtrans");
+            console.log("googtrans cookie:", langCookie);
+
+            let code = "";
+            if (langCookie) {
+                const parts = langCookie.split("/");
+                if (parts.length >= 3) code = parts[2].toLowerCase();
+            }
+            console.log("Detected language code:", code);
+
+            if (code === "hi") {
+                settingsWrap.classList.add("hi-lang");
+                console.log("Added hi-lang class");
+            }
+
+        });
+    </script>
+
+
 
 
 </body>

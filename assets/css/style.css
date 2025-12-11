@@ -13600,10 +13600,15 @@ html[class="rtl"] .swiper .swiper-slide * {
   position: fixed;
   top: 50%;
   right: -195px;
-  transform: translateY(-105%);
+  transform: translateY(-150%);
   z-index: 3;
   transition: all ease 0.5s;
 }
+
+.hi-lang {
+  right: -180px;
+}
+
 .settings-btn-wrap .settings-button {
   margin-right: 0;
   border: none;
@@ -14163,15 +14168,15 @@ Page-navigation Area Style
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: -27px;
+  right: -15px;
   background-color: #4292c8;
   width: 8px;
   height: 8px;
   border-radius: 100px;
 }
-.link-social-wrap .link a:last-child::before {
+/* .link-social-wrap .link a:last-child::before {
   display: none;
-}
+} */
 .link-social-wrap .social-link {
   gap: 10px;
 }
