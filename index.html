@@ -2171,6 +2171,7 @@
 
     window.addEventListener('DOMContentLoaded', updateToggleButton);
 
+    // Button click listener to switch languages
     document.getElementById('toggleLangBtn').addEventListener('click', function () {
         const currentLang = getCurrentLang();
         const newLang = (currentLang === 'en') ? 'hi' : 'en';
@@ -2203,6 +2204,10 @@
         }
     });
 </script>
+
+<!-- Include the Google Translate API -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 <!-- Include the Google Translate API -->
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
