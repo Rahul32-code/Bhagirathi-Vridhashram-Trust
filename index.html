@@ -2018,7 +2018,7 @@
         // Set fresh cookie for the current domain
         document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
         // Set fresh cookie for the root domain (subdomain-independent)
-        document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`;
+        // document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
 
         // Reload page to apply the language change
         location.reload();
@@ -2062,6 +2062,7 @@
     // Function to get cookies by name
     function getCookie(name) {
         const cookies = document.cookie.split("; ");
+        console.log(cookies)
         for (let c of cookies) {
             const [key, value] = c.split("=");
             if (key === name) return decodeURIComponent(value);
