@@ -7,7 +7,7 @@
 		const getHeaderId = document.getElementById("navbar");
 		if (getHeaderId) {
 			window.addEventListener('scroll', event => {
-				const height = 200;
+				const height = 100;
 				const { scrollTop } = event.target.scrollingElement;
 				document.querySelector('#navbar').classList.toggle('sticky', scrollTop >= height);
 			});

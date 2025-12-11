@@ -37,8 +37,11 @@
                             class="d-flex flex-wrap justify-content-center justify-content-lg-start flex-md-nowrap align-items-center p-0 m-0 list-unstyled header-info">
                             <li class="d-flex align-items-center gap-10">
                                 <i class="ti ti-map-pin"></i>
-                                <span>Location: Bhagirathi Vridhashram Trust Bagadpur Road, Boojghat, District Hapur
-                                    (U.P.)</span>
+                                <a href="https://maps.app.goo.gl/cB4Z7wfYxHD3zFbSA" target="_blank"
+                                    rel="noopener noreferrer" class="text-decoration-none">
+                                    <span class="text-dark">Bhagirathi Vridhashram Trust Bagadpur Road, Boojghat, District Hapur
+                                        (U.P.)</span>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -113,7 +116,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="our-trustee.html">
-                                        Our Trustee 
+                                        Our Trustee
                                     </a>
                                 </li>
                                 <li>
@@ -535,13 +538,13 @@
                             where they can live with comfort and respect.</p>
 
                         <div class="d-flex align-items-center flex-wrap banner-btn">
-                            <a href="#" class="default-btn">
+                            <a href="contact-us.html" class="default-btn">
                                 <div class="d-flex gap-10 align-content-center">
                                     <span>Get In Touch</span>
                                     <img src="assets/images/right-white.svg" alt="right-white">
                                 </div>
                             </a>
-                            <a href="tel:+1(444)5078494" class="d-flex align-items-center gap-20 call-us">
+                            <a href="tel:+919412990142" class="d-flex align-items-center gap-20 call-us">
                                 <i class="ti ti-phone-call"></i>
                                 <div>
                                     <span class="d-block">Need Help</span>
@@ -733,7 +736,7 @@
                                 <div class="about-btn d-flex flex-wrap align-items-center gap-3">
 
                                     <!-- More About Us Button -->
-                                    <a href="#" class="default-btn">
+                                    <a href="about-us.html" class="default-btn">
                                         <div class="d-flex align-items-center gap-2">
                                             <span>More About Us</span>
                                             <img src="assets/images/right-white.svg" alt="right-white">
@@ -1850,6 +1853,9 @@
                             <li>
                                 <a href="terms-conditions.html">Terms & Condition</a>
                             </li>
+                            <li>
+                                <a href="faqs.html">FAQs</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1995,94 +2001,106 @@
     </script> -->
 
     <script>
-function eraseCookie(name, domain) {
-    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain + ";";
-}
+    function eraseCookie(name, domain) {
+        // To delete the cookie
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+    }
 
-// Set Translate cookie properly
-function setTranslateLang(lang) {
-    const val = "/en/" + lang;
-    const name = "googtrans";
+    // Set Translate cookie properly
+    function setTranslateLang(lang) {
+        const val = "/en/" + lang;
+        const name = "googtrans";
 
-    // Clear possible duplicates
-    eraseCookie(name, location.hostname);
-    eraseCookie(name, "." + location.hostname);
+        // Clear possible duplicates based on current hostname
+        eraseCookie(name, location.hostname);        // Delete cookie for current domain
+        eraseCookie(name, "." + location.hostname);  // Delete cookie for subdomains
 
-    // Set fresh cookie
-    document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60*60*24*30}`;
-    document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60*60*24*30}`;
+        // Set fresh cookie for the current domain
+        document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
+        // Set fresh cookie for the root domain (subdomain-independent)
+        document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`;
 
-    location.reload();
-}
+        // Reload page to apply the language change
+        location.reload();
+    }
 
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,hi',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-}
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,hi',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+    }
 
-function getCurrentLang() {
-    const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
-    return match ? match[1] : 'en';
-}
+    // Get the current language based on googtrans cookie
+    function getCurrentLang() {
+        const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
+        return match ? match[1] : 'en'; // Default to 'en' if no match
+    }
 
-function updateToggleButton() {
-    const lang = getCurrentLang();
-    const toggleBtn = document.getElementById('toggleLangBtn');
-    if (toggleBtn) toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
-}
+    // Update language toggle button
+    function updateToggleButton() {
+        const lang = getCurrentLang();
+        const toggleBtn = document.getElementById('toggleLangBtn');
+        if (toggleBtn) toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
+    }
 
-window.addEventListener('DOMContentLoaded', updateToggleButton);
+    // Wait for DOM to load and update the button text
+    window.addEventListener('DOMContentLoaded', updateToggleButton);
 
-document.getElementById('toggleLangBtn').addEventListener('click', function () {
-    const currentLang = getCurrentLang();
-    const newLang = (currentLang === 'en') ? 'hi' : 'en';
-    setTranslateLang(newLang);
-});
+    // Event listener for language toggle button
+    document.getElementById('toggleLangBtn').addEventListener('click', function () {
+        const currentLang = getCurrentLang();
+        const newLang = (currentLang === 'en') ? 'hi' : 'en';
+        setTranslateLang(newLang);
+    });
 </script>
 
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+<script>
+    // Function to get cookies by name
+    function getCookie(name) {
+        const cookies = document.cookie.split("; ");
+        for (let c of cookies) {
+            const [key, value] = c.split("=");
+            if (key === name) return decodeURIComponent(value);
+        }
+        return null; // Return null if cookie not found
+    }
 
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    // Wait for DOM to be ready before processing
+    document.addEventListener("DOMContentLoaded", function () {
+        const settingsWrap = document.querySelector(".settings-btn-wrap");
 
-    <script>
-        function getCookie(name) {
-            const cookies = document.cookie.split("; ");
-            for (let c of cookies) {
-                const [key, value] = c.split("=");
-                if (key === name) return decodeURIComponent(value);
-            }
-            return null;
+        // Log if element is found
+        console.log("Settings Wrap Element:", settingsWrap);
+
+        if (!settingsWrap) {
+            console.warn("⚠ .settings-btn-wrap not found in DOM!");
+            return; // Exit if element not found
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const settingsWrap = document.querySelector(".settings-btn-wrap");
-            console.log("Settings Wrap Element:", settingsWrap);
+        // Get the googtrans cookie
+        const langCookie = getCookie("googtrans");
+        console.log("googtrans cookie:", langCookie);
 
-            if (!settingsWrap) {
-                console.warn("⚠ .settings-btn-wrap not found in DOM!");
-                return;
-            }
+        let code = "";
+        if (langCookie) {
+            const parts = langCookie.split("/");
+            if (parts.length >= 3) code = parts[2].toLowerCase(); // Get the language code
+        }
+        console.log("Detected language code:", code);
 
-            const langCookie = getCookie("googtrans");
-            console.log("googtrans cookie:", langCookie);
+        // Add class based on the detected language (hi or en)
+        if (code === "hi") {
+            settingsWrap.classList.add("hi-lang");
+            console.log("Added hi-lang class");
+        }
 
-            let code = "";
-            if (langCookie) {
-                const parts = langCookie.split("/");
-                if (parts.length >= 3) code = parts[2].toLowerCase();
-            }
-            console.log("Detected language code:", code);
+    });
+</script>
 
-            if (code === "hi") {
-                settingsWrap.classList.add("hi-lang");
-                console.log("Added hi-lang class");
-            }
-
-        });
-    </script>
 
 
 
