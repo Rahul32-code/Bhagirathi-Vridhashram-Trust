@@ -47,7 +47,7 @@
                             class="d-flex link-social-wrap align-items-center justify-content-between justify-content-lg-end gap-4">
                             <div class="d-flex link">
                                 <!-- <a href="#">Testimonials</a> -->
-                                <a href="faqs.html">FAQ</a>
+                                <a href="#">FAQ</a>
                             </div>
                             <div class="social-link d-flex align-items-center">
                                 <a href="https://www.facebook.com/profile.php?id=61581365741099" target="_blank">
@@ -113,7 +113,12 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="our-trustee.html">
-                                        Our Trustee & Members
+                                        Our Trustee 
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="our-members.html">
+                                        Our Members
                                     </a>
                                 </li>
                             </ul>
@@ -357,7 +362,12 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="our-trustee.html">
-                                Our Trustee & Members
+                                Our Trustee
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="our-member.html">
+                                Our Members
                             </a>
                         </li>
                     </ul>
@@ -1985,11 +1995,22 @@
     </script> -->
 
     <script>
+function eraseCookie(name, domain) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + domain + ";";
+}
+
+// Set Translate cookie properly
 function setTranslateLang(lang) {
     const val = "/en/" + lang;
+    const name = "googtrans";
 
-    document.cookie = `googtrans=${val};path=/;domain=${location.hostname};max-age=${60*60*24*30}`;
-    document.cookie = `googtrans=${val};path=/;domain=.${location.hostname};max-age=${60*60*24*30}`;
+    // Clear possible duplicates
+    eraseCookie(name, location.hostname);
+    eraseCookie(name, "." + location.hostname);
+
+    // Set fresh cookie
+    document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60*60*24*30}`;
+    document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60*60*24*30}`;
 
     location.reload();
 }
@@ -2021,6 +2042,7 @@ document.getElementById('toggleLangBtn').addEventListener('click', function () {
     setTranslateLang(newLang);
 });
 </script>
+
 
 
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
