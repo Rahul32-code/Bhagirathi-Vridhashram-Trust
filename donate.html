@@ -505,6 +505,8 @@
         <div class="container mw-1685">
             <div class="page-banner-content text-center">
                 <h2 class="main-title mx-auto text-white">Support Bhagirathi Vridhashram Trust</h2>
+                <p class="text-white text-center fs-20 pb-3">All donations to Support Bhagirathi Vridhashram Trust are 50% Tax Exempt under Section 80G of
+                        the Income Tax Act, 1961.</p>
                 <ul class="p-0 m-0 list-unstyled d-flex align-items-center justify-content-center">
                     <li>
                         <a href="index.html" class="text-decoration-none">
@@ -526,21 +528,20 @@
             <div class="row g-4">
                 <div class="col-xl-8">
                     <div class="details-content">
-                        <h3>Donation Information</h3>
-                        <p>Your generosity has the power to change lives. By donating, you support vital care services
-                            for the elderly—ensuring they receive the respect attention, and comfort they deserve in
-                            their later years. Your contribution helps provide nutritious meals medical support</p>
-                        <p>Your donation makes a real difference in the lives of those who need compassionate care and
-                            support. By contributing, you help provide essential services, medical supplies, daily care,
-                            and a safe, nurturing environment for the elderly in our community. Every gift—big or
-                            small—helps us continue our mission of dignity, respect, and quality care for all</p>
+                        <h3>Support with Compassion: Uplifting Lives of the Elderly</h3>
+                        <p>At Bhagirathi Vridhashram Trust, we believe that every elderly person deserves care, dignity,
+                            and love in their golden years. Your kind donations help us provide shelter, nutritious
+                            meals, medical assistance, and emotional support to those who have no one else to turn to.
+                        </p>
+                        <p>Together, we can bring comfort, hope, and happiness to the lives of our elders — because
+                            caring for them is not just charity, it’s humanity.</p>
 
-                        <h3>Ways To Donate</h3>
-                        <p>Every donation brings us one step closer to a community where all seniors are valued,
-                            supported, and never alone. Thank you for standing with us in care and compassion. Together,
-                            we can ensure that no senior is left without the support they deserve.</p>
+                        <h3>Together We Can Brighten the Lives of the Elderly Through Kindness and Care</h3>
+                        <p>At Bhagirathi Vridhashram Trust, we provide love, care, and dignity to the elderly. Your
+                            support helps us offer shelter, nutritious meals, medical aid, and emotional support to
+                            those in need. Together, we can bring comfort and happiness to their golden years.</p>
 
-                        <div class="pl-150">
+                        <!-- <div class="pl-150">
                             <h4>Online donation</h4>
                             <ul class="p-0 m-0 list-unstyled responsibilities">
                                 <li class="d-flex align-items-center gap-15">
@@ -589,89 +590,158 @@
                                     <span>Our representative will assist you in processing your donation securely</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="col-xl-4">
+                    <style>
+                        .step {
+                            display: none;
+                        }
+
+                        .step.active {
+                            display: block;
+                        }
+                    </style>
+
                     <div class="sidebar mw-442 ms-xl-auto">
-                        <form class="sidebar-widget bg-f2f3f5">
-                            <h2>$18,800 <span>of $10,000 raised</span></h2>
+                        <form class="sidebar-widget bg-f2f3f5" id="donationForm">
 
-                            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25"
-                                aria-valuemin="0" aria-valuemax="100"
-                                style="height: 9px; background-color: rgba(0, 0, 0, 0.12);">
-                                <div class="progress-bar" style="width: 85%; height: 9px;"></div>
-                            </div>
+                            <!-- STEP 1 : SELECT AMOUNT -->
+                            <div class="step active" id="step1">
+                                <h3>Select Donation Amount</h3>
 
-                            <p class="notes position-relative z-1 mb-4">
-                                <i
-                                    class="ti ti-alert-triangle-filled position-absolute top-50 start-0 translate-middle"></i>
-                                <span>Notice:</span> Test mode is enabled. While in test mode no live donations are
-                                processed.
-                            </p>
-
-                            <div class="input-group mb-4">
-                                <span class="input-group-text border-0 px-4 text-secondary"
-                                    style="background: #D9ECFF;">$</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    placeholder="100.00">
-                            </div>
-
-                            <div class="d-flex justify-content-between align-items-center gap-25 mb-25 mb-4">
-                                <button class="bg-primary text-white p-3 border-0 w-100 rounded-3">100.00</button>
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">200.00</button>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center gap-25 mb-25 price-btn mb-4">
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">500.00</button>
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">1000.00</button>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center gap-25 mb-25 price-btn mb-4">
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">2000.00</button>
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">5000.00</button>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center gap-25 mb-25 price-btn mb-4">
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">10,000.00</button>
-                                <button class="bg-white p-3 border-0 w-100 rounded-3">Custom Amount</button>
-                            </div>
-                            <h3 class="border-bottom pb-2">Select Payment Method</h3>
-
-                            <div class="d-flex align-items-center gap-25 mb-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault1">
-                                    <label class="form-check-label" for="radioDefault1">
-                                        Test Donation
-                                    </label>
+                                <div class="input-group mb-4 mt-3">
+                                    <span class="input-group-text border-0 px-4 text-secondary"
+                                        style="background: #D9ECFF;">₹</span>
+                                    <input type="text" id="amount" class="form-control" placeholder="Enter Amount">
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="radioDefault" id="radioDefault2"
-                                        checked>
-                                    <label class="form-check-label" for="radioDefault2">
-                                        Offline Donation
-                                    </label>
+
+                                <div class="d-flex gap-25 mb-4">
+                                    <button type="button" onclick="setAmount(100)"
+                                        class="bg-white p-3 border-0 w-100 rounded-3">100</button>
+                                    <button type="button" onclick="setAmount(200)"
+                                        class="bg-white p-3 border-0 w-100 rounded-3">200</button>
+                                </div>
+
+                                <div class="d-flex gap-25 mb-4">
+                                    <button type="button" onclick="setAmount(500)"
+                                        class="bg-white p-3 border-0 w-100 rounded-3">500</button>
+                                    <button type="button" onclick="setAmount(1000)"
+                                        class="bg-white p-3 border-0 w-100 rounded-3">1000</button>
+                                </div>
+
+                                <button type="button" class="default-btn w-100" onclick="nextStep(1)">
+                                    Next
+                                </button>
+                            </div>
+
+                            <!-- STEP 2 : PERSONAL INFO -->
+                            <div class="step" id="step2">
+                                <h3>Personal Details</h3>
+
+                                <input type="text" class="form-control mb-3" id="fullname" placeholder="Full Name"
+                                    required>
+                                <input type="text" class="form-control mb-3" id="phone" placeholder="Phone Number"
+                                    required>
+                                <input type="email" class="form-control mb-3" id="email" placeholder="Email Address"
+                                    required>
+                                <input type="text" class="form-control mb-3" id="address" placeholder="Address"
+                                    required>
+                                <input type="text" class="form-control mb-3" id="aadhar"
+                                    placeholder="Aadhar No (Optional)">
+                                <input type="text" class="form-control mb-4" id="pan" placeholder="PAN No (Optional)">
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="bg-white p-2 border-0 rounded-3"
+                                        onclick="prevStep(2)">Back</button>
+                                    <button type="button" class="default-btn" onclick="nextStep(2)">Next</button>
                                 </div>
                             </div>
 
-                            <h3 class="border-bottom pb-2">Personal Info</h3>
+                            <!-- STEP 3 : QR PAYMENT -->
+                            <div class="step" id="step3">
+                                <h3>Scan & Pay</h3>
 
-                            <div class="d-flex justify-content-between gap-25 mb-4">
-                                <input type="text" class="form-control" placeholder="First Name">
-                                <input type="text" class="form-control" placeholder="First Name">
-                            </div>
-                            <input type="text" class="form-control mb-4" placeholder="Email Address">
-                            <div class="input-group mb-4">
-                                <span class="input-group-text border-0 px-4 text-secondary"
-                                    style="background: #D9ECFF;">Donation Total:</span>
-                                <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)"
-                                    placeholder="$100.00">
-                            </div>
-                            <button class="default-btn w-100">
-                                <div class="d-flex align-items-center gap-10 justify-content-center">
-                                    <span>Donate now</span>
-                                    <img src="assets/images/right-white.svg" alt="right-white">
+                                <p class="mt-2 mb-2">Please scan the QR code below and complete your donation.</p>
+
+                                <div class="text-center mb-3">
+                                    <img src="assets/images/qr.png" alt="QR Code" width="250">
                                 </div>
-                            </button>
+
+                                <label class="mb-2">Upload Payment Screenshot:</label>
+                                <input type="file" class="form-control mb-4" id="screenshot" required>
+
+                                <label class="mb-2">UTR / Transaction No.:</label>
+                                <input type="text" class="form-control mb-4" id="utr" placeholder="Enter UTR No."
+                                    required>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="bg-white p-2 border-0 rounded-3"
+                                        onclick="prevStep(3)">Back</button>
+                                    <button type="button" class="default-btn" onclick="submitDonation()">Submit</button>
+                                </div>
+                            </div>
+
+                            <!-- SUCCESS MESSAGE -->
+                            <div class="step text-center" id="successStep">
+                                <h3 class="text-success mt-3">Your donation was successful!</h3>
+                                <p>Thank you for your generous support.</p>
+                            </div>
+
                         </form>
                     </div>
+
+                    <script>
+                        function setAmount(val) {
+                            document.getElementById("amount").value = val;
+                        }
+
+                        function nextStep(step) {
+                            if (step === 1) {
+                                if (document.getElementById("amount").value === "") {
+                                    alert("Please enter donation amount.");
+                                    return;
+                                }
+                            }
+
+                            if (step === 2) {
+                                if (
+                                    document.getElementById("fullname").value === "" ||
+                                    document.getElementById("phone").value === "" ||
+                                    document.getElementById("email").value === "" ||
+                                    document.getElementById("address").value === ""
+                                ) {
+                                    alert("Please fill all required fields.");
+                                    return;
+                                }
+                            }
+
+                            document.querySelector("#step" + step).classList.remove("active");
+                            document.querySelector("#step" + (step + 1)).classList.add("active");
+                        }
+
+                        function prevStep(step) {
+                            document.querySelector("#step" + step).classList.remove("active");
+                            document.querySelector("#step" + (step - 1)).classList.add("active");
+                        }
+
+                        function submitDonation() {
+                            if (document.getElementById("utr").value === "") {
+                                alert("Please enter UTR Number");
+                                return;
+                            }
+
+                            if (document.getElementById("screenshot").files.length === 0) {
+                                alert("Please upload payment screenshot.");
+                                return;
+                            }
+
+                            document.querySelector("#step3").classList.remove("active");
+                            document.querySelector("#successStep").classList.add("active");
+                        }
+                    </script>
+
                 </div>
             </div>
         </div>
