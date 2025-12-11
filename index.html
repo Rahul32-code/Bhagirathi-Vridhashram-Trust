@@ -2012,11 +2012,11 @@
         const name = "googtrans";
 
         // Clear possible duplicates based on current hostname
-        eraseCookie(name, location.hostname);        // Delete cookie for current domain
         eraseCookie(name, "." + location.hostname);  // Delete cookie for subdomains
+        eraseCookie(name, location.hostname);        // Delete cookie for current domain
 
         // Set fresh cookie for the current domain
-        document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
+        // document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
         // Set fresh cookie for the root domain (subdomain-independent)
         // document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
 
