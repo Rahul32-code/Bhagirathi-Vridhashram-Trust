@@ -2092,7 +2092,7 @@
 <script>
     // Function to erase cookies by name and domain
     function eraseCookie(name, domain) {
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
+        document.cookie = `${name}=; expires=Session path=/; domain=${domain};`;
         console.log(`Cookie ${name} has been deleted for domain ${domain}`);
     }
 
