@@ -2088,14 +2088,13 @@
         }
     });
 </script> -->
-
 <script>
-    // Function to erase cookies by name and domain
+    // Function to erase cookies by name and domain (both session and persistent cookies)
     function eraseCookie(name, domain) {
-        // Delete persistent cookie by setting its expiration date to a past date
+        // Delete persistent cookie by setting expiration to a past date
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
 
-        // Delete session cookie by setting its expiration to Session (browser session)
+        // Delete session cookie
         document.cookie = `${name}=; expires=Session; path=/; domain=${domain};`;
 
         console.log(`Cookie ${name} has been deleted for domain ${domain}`);
@@ -2104,28 +2103,25 @@
     // Function to get cookies by name
     function getCookie(name) {
         const cookies = document.cookie.split("; ");
-        console.log(cookies);  // For debugging
+        console.log(cookies); // For debugging
+
         for (let c of cookies) {
             const [key, value] = c.split("=");
+
             if (key === name) return decodeURIComponent(value);
         }
+
         return null; // Return null if cookie not found
     }
 
     // Function to destroy the 'googtrans' cookie based on its value
     function destroyCookies() {
-        // Erase cookies for both the current domain and subdomain
-        eraseCookie('googtrans', location.hostname);       // Delete for current domain
-        eraseCookie('googtrans', '.' + location.hostname);  // Delete for subdomain
+        // Erase cookies for both current domain and subdomain
+        eraseCookie('googtrans', location.hostname); // For current domain
+        eraseCookie('googtrans', '.' + location.hostname); // For subdomain
 
-        // Log to confirm the deletion
         console.log('All googtrans cookies deleted.');
     }
-
-    // Destroy cookies on page load
-    document.addEventListener("DOMContentLoaded", function () {
-        destroyCookies(); // Destroy cookies after the page loads
-    });
 
     // Function to reset the translate language and reload the page
     function resetTranslateLang() {
@@ -2208,8 +2204,9 @@
     });
 </script>
 
-<!-- Use HTTPS instead of HTTP -->
+<!-- Include the Google Translate API -->
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 
 
