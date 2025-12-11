@@ -2009,7 +2009,7 @@
     // Function to get cookies by name
     function getCookie(name) {
         const cookies = document.cookie.split("; ");
-        console.log(cookies)
+        console.log(cookies);
         for (let c of cookies) {
             const [key, value] = c.split("=");
             if (key === name) return decodeURIComponent(value);
@@ -2017,20 +2017,20 @@
         return null; // Return null if cookie not found
     }
 
-    // Function to set the language
+    // Function to set the language and overwrite duplicate cookies
     function setTranslateLang(lang) {
         const val = "/en/" + lang;
         const name = "googtrans";
 
-        // Erase possible duplicate cookies for both current domain and subdomain
+        // Erase duplicate cookies
         eraseCookie(name, location.hostname);
         eraseCookie(name, "." + location.hostname);
 
-        // Set the correct cookie for the domain and subdomain
+        // Set the correct cookie for both current and subdomain
         document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
         document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`;
 
-        location.reload(); // Reload the page after setting cookie
+        location.reload(); // Reload to apply new language
     }
 
     // Function to initialize Google Translate element
@@ -2057,19 +2057,20 @@
 
     window.addEventListener('DOMContentLoaded', updateToggleButton);
 
+    // Toggle language on button click
     document.getElementById('toggleLangBtn').addEventListener('click', function () {
         const currentLang = getCurrentLang();
         const newLang = (currentLang === 'en') ? 'hi' : 'en';
         setTranslateLang(newLang); // Set the new language in cookie
     });
 
-    // Check for the current language and apply necessary class to settings button
+    // Detect and apply language preference based on the current cookie
     document.addEventListener("DOMContentLoaded", function () {
         const settingsWrap = document.querySelector(".settings-btn-wrap");
 
         if (!settingsWrap) {
             console.warn("⚠ .settings-btn-wrap not found in DOM!");
-            return; // Exit if element not found
+            return;
         }
 
         const langCookie = getCookie("googtrans");
@@ -2082,15 +2083,15 @@
         }
         console.log("Detected language code:", code);
 
-        // Add class based on the detected language (hi or en)
+        // Apply class based on the detected language
         if (code === "hi") {
             settingsWrap.classList.add("hi-lang");
             console.log("Added hi-lang class");
         }
     });
 </script>
-
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 
 
