@@ -2003,40 +2003,48 @@
 <script>
     // Function to erase cookies by name and domain
     function eraseCookie(name, domain) {
-        // Set the cookie expiry date to a past date to remove it
         document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${domain};`;
-        console.log(`Cookie ${name} erased for domain ${domain}`);
+        console.log(`Cookie ${name} has been deleted for domain ${domain}`);
     }
 
     // Function to get cookies by name
     function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    console.log(cookies);
-    
-    // Check the cookies array for the one that matches the name
-    let cookieValue = null;
-    
-    // Iterate through the cookies array
-    for (let c of cookies) {
-        const [key, value] = c.split("=");
+        const cookies = document.cookie.split("; ");
+        console.log(cookies);  // For debugging
 
-        if (key === name) {
-            cookieValue = decodeURIComponent(value); // Get the cookie value
+        for (let c of cookies) {
+            const [key, value] = c.split("=");
+
+            if (key === name) return decodeURIComponent(value);
         }
+
+        return null; // Return null if cookie not found
     }
 
-    // If more than one cookie is found for the same name, choose the last one
-    if (cookieValue) {
-        console.log("Selected cookie value: ", cookieValue);
-        return cookieValue;
+    // Function to destroy the 'googtrans' cookie based on its value
+    function destroyCookies() {
+        // Erase cookies for both the current domain and subdomain
+        eraseCookie('googtrans', location.hostname);       // Delete for current domain
+        eraseCookie('googtrans', '.' + location.hostname);  // Delete for subdomain
+
+        // Log to confirm the deletion
+        console.log('All googtrans cookies deleted.');
     }
 
-    // If no cookie is found, return null
-    return null;
-}
+    // Destroy cookies on page load
+    document.addEventListener("DOMContentLoaded", function () {
+        destroyCookies(); // Destroy cookies after the page loads
+    });
 
+    // Function to reset the translate language and reload the page
+    function resetTranslateLang() {
+        // Call destroyCookies when language is reset
+        destroyCookies();
+        console.log("Cookies cleared, page reloading...");
+        location.reload(); // Reload to reset translation settings
+    }
 
-    // Function to set the language cookie (for Google Translate)
+    // Function to set the language and cookie
     function setTranslateLang(lang) {
         const val = "/en/" + lang;
         const name = "googtrans";
@@ -2046,10 +2054,10 @@
         eraseCookie(name, "." + location.hostname);
 
         // Set the correct cookie for the domain and subdomain
-        document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;
-        document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`;
+        document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;  // Cookie for current domain
+        document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`; // Cookie for subdomain
 
-        location.reload(); // Reload the page after setting the cookie to apply changes
+        location.reload(); // Reload the page after setting cookie
     }
 
     // Function to initialize Google Translate element
@@ -2061,10 +2069,10 @@
         }, 'google_translate_element');
     }
 
-    // Function to get the current language (from cookies)
+    // Function to detect current language based on cookies
     function getCurrentLang() {
         const match = document.cookie.match(/googtrans=\/en\/(hi|en)/);
-        return match ? match[1] : 'en'; // Default to 'en' if no match
+        return match ? match[1] : 'en';
     }
 
     // Update the toggle button text based on the detected language
@@ -2074,13 +2082,11 @@
         if (toggleBtn) toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
     }
 
-    // Add event listener to update toggle button text on page load
     window.addEventListener('DOMContentLoaded', updateToggleButton);
 
-    // Event listener for the language toggle button
     document.getElementById('toggleLangBtn').addEventListener('click', function () {
         const currentLang = getCurrentLang();
-        const newLang = (currentLang === 'en') ? 'hi' : 'en'; // Toggle language
+        const newLang = (currentLang === 'en') ? 'hi' : 'en';
         setTranslateLang(newLang); // Set the new language in cookie
     });
 
@@ -2107,9 +2113,6 @@
         if (code === "hi") {
             settingsWrap.classList.add("hi-lang");
             console.log("Added hi-lang class");
-        } else {
-            settingsWrap.classList.remove("hi-lang");
-            console.log("Removed hi-lang class");
         }
     });
 </script>
