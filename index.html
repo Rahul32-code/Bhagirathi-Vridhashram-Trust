@@ -2011,37 +2011,21 @@
     function getCookie(name) {
         const cookies = document.cookie.split("; ");
         console.log(cookies);  // For debugging
-
         for (let c of cookies) {
             const [key, value] = c.split("=");
-
             if (key === name) return decodeURIComponent(value);
         }
-
         return null; // Return null if cookie not found
     }
 
     // Function to destroy the 'googtrans' cookie based on its value
     function destroyCookies() {
         // Erase cookies for both the current domain and subdomain
-        // eraseCookie('googtrans', location.hostname);       // Delete for current domain
+        eraseCookie('googtrans', location.hostname);       // Delete for current domain
         eraseCookie('googtrans', '.' + location.hostname);  // Delete for subdomain
 
         // Log to confirm the deletion
         console.log('All googtrans cookies deleted.');
-    }
-
-    // Destroy cookies on page load
-    document.addEventListener("DOMContentLoaded", function () {
-        destroyCookies(); // Destroy cookies after the page loads
-    });
-
-    // Function to reset the translate language and reload the page
-    function resetTranslateLang() {
-        // Call destroyCookies when language is reset
-        destroyCookies();
-        console.log("Cookies cleared, page reloading...");
-        location.reload(); // Reload to reset translation settings
     }
 
     // Function to set the language and cookie
@@ -2057,7 +2041,8 @@
         document.cookie = `${name}=${val};path=/;domain=${location.hostname};max-age=${60 * 60 * 24 * 30}`;  // Cookie for current domain
         document.cookie = `${name}=${val};path=/;domain=.${location.hostname};max-age=${60 * 60 * 24 * 30}`; // Cookie for subdomain
 
-        location.reload(); // Reload the page after setting cookie
+        // Reload the page after setting cookie
+        location.reload(); 
     }
 
     // Function to initialize Google Translate element
@@ -2084,9 +2069,13 @@
 
     window.addEventListener('DOMContentLoaded', updateToggleButton);
 
+    // Handle language toggle click event
     document.getElementById('toggleLangBtn').addEventListener('click', function () {
         const currentLang = getCurrentLang();
         const newLang = (currentLang === 'en') ? 'hi' : 'en';
+
+        // Destroy the old cookie and set a new one with the selected language
+        destroyCookies(); // Delete the existing cookie
         setTranslateLang(newLang); // Set the new language in cookie
     });
 
@@ -2117,8 +2106,8 @@
     });
 </script>
 
-<!-- Google Translate Script -->
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 
 
