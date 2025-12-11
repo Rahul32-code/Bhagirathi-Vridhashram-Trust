@@ -2024,7 +2024,7 @@
     // Function to destroy the 'googtrans' cookie based on its value
     function destroyCookies() {
         // Erase cookies for both the current domain and subdomain
-        eraseCookie('googtrans', location.hostname);       // Delete for current domain
+        // eraseCookie('googtrans', location.hostname);       // Delete for current domain
         eraseCookie('googtrans', '.' + location.hostname);  // Delete for subdomain
 
         // Log to confirm the deletion
