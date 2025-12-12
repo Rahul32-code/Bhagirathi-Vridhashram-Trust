@@ -2101,8 +2101,7 @@
 
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-
-   <script>
+<script>
     // ---------------------------
     // Utility Functions
     // ---------------------------
@@ -2180,6 +2179,7 @@
 
     // Run after page load (important for Google Translate)
     window.addEventListener("load", function () {
+        // Slight delay to ensure Google Translate has fully initialized
         setTimeout(initLanguage, 1000);
     });
 
@@ -2194,10 +2194,14 @@
             const current = getCurrentLang();
             const nextLang = (current === "en") ? "hi" : "en";
 
-            setTranslateLang(nextLang);
+            // Wait for Google Translate to load before switching languages
+            setTimeout(function() {
+                setTranslateLang(nextLang);
+            }, 500); // Delay to ensure the language switch happens after Translate is ready
         });
     });
 </script>
+
 <!-- Include the Google Translate API -->
 <!-- <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
