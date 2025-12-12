@@ -2088,31 +2088,270 @@
     });
 </script> -->
 <script>
-    // Function to erase cookies by name and domain
+    // === ADD THIS FUNCTION AT THE BEGINNING OF YOUR SCRIPT ===
+    // Function to detect and remove session cookies immediately
+    function detectAndRemoveSessionCookies() {
+        const cookies = document.cookie.split('; ');
+        let foundSessionCookie = false;
+        
+        cookies.forEach(cookie => {
+            if (cookie.startsWith('googtrans=')) {
+                // Check if it's a session cookie (no expires/max-age)
+                const cookieStr = cookie + '; ' + document.cookie;
+                if (!cookieStr.includes('expires=') && !cookieStr.includes('max-age=')) {
+                    console.log('🚨 Found SESSION cookie for googtrans - Removing...');
+                    foundSessionCookie = true;
+                    
+                    // Extract value
+                    const value = cookie.split('=')[1];
+                    
+                    // Remove session cookie
+                    const hostname = window.location.hostname;
+                    document.cookie = `googtrans=; path=/; domain=${hostname}; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    document.cookie = `googtrans=; path=/; domain=.${hostname}; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
+                    
+                    // Set as persistent cookie
+                    if (value) {
+                        const maxAge = 60 * 60 * 24 * 30; // 30 days
+                        document.cookie = `googtrans=${value}; path=/; domain=${hostname}; max-age=${maxAge}`;
+                        document.cookie = `googtrans=${value}; path=/; domain=.${hostname}; max-age=${maxAge}`;
+                        console.log('✅ Converted to PERSISTENT cookie with 30 days expiry');
+                    }
+                } else {
+                    console.log('✅ googtrans is already a PERSISTENT cookie');
+                }
+            }
+        });
+        
+        return foundSessionCookie;
+    }
+    
+    // Call immediately when script loads
+    detectAndRemoveSessionCookies();
+    
+    // === MODIFY YOUR eraseCookie FUNCTION ===
+    // Update your eraseCookie function to specifically target session cookies
     function eraseCookie(name, domain) {
         // Delete for all possible paths and variations
         const domains = [
             domain,
             '.' + domain,
             location.hostname,
-            '.' + location.hostname
+            '.' + location.hostname,
+            window.location.host
         ];
         
-        const paths = ['/', '/', ''];
+        const paths = ['/', '', '/;'];
         const expiration = 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         
-        // Clear all possible variations
+        // Clear all possible variations - ESPECIALLY SESSION COOKIES
         domains.forEach(dom => {
             paths.forEach(path => {
+                // Standard deletion
                 document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom};`;
-                document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom}; secure;`;
-                document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom}; samesite=lax;`;
+                
+                // Specifically target session cookies
+                document.cookie = `${name}=; path=${path}; domain=${dom};`; // Session cookie removal
+                
+                // Additional variations
+                document.cookie = `${name}=; ${expiration} path=${path};`;
+                document.cookie = `${name}=; path=${path};`;
             });
         });
         
-        console.log(`Cookies for ${name} cleared`);
+        console.log(`🚫 All variations of ${name} cookie cleared (including session cookies)`);
     }
+    
+    // === ADD THIS FUNCTION TO INTERCEPT COOKIE SETTING ===
+    // Prevent Google Translate from creating session cookies
+    function preventSessionCookieCreation() {
+        // Store original cookie setter
+        const originalSetCookie = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie') || 
+                                  Object.getOwnPropertyDescriptor(HTMLDocument.prototype, 'cookie');
+        
+        if (originalSetCookie && originalSetCookie.set) {
+            Object.defineProperty(document, 'cookie', {
+                get: function() {
+                    return originalSetCookie.get.call(this);
+                },
+                set: function(value) {
+                    // Intercept googtrans cookie setting
+                    if (typeof value === 'string' && value.includes('googtrans')) {
+                        console.log('🔍 Cookie set attempt:', value);
+                        
+                        // If it's trying to set a session cookie (no expires/max-age)
+                        if (!value.includes('expires=') && !value.includes('max-age=')) {
+                            console.log('🛑 Blocking SESSION cookie creation for googtrans');
+                            
+                            // Convert to persistent cookie
+                            const maxAge = 60 * 60 * 24 * 30; // 30 days
+                            value = value.replace(';', '') + `; max-age=${maxAge}`;
+                            
+                            // Ensure domain is set
+                            if (!value.includes('domain=')) {
+                                value += `; domain=${window.location.hostname}`;
+                            }
+                            
+                            console.log('✅ Converted to:', value);
+                        }
+                    }
+                    
+                    return originalSetCookie.set.call(this, value);
+                }
+            });
+            console.log('✅ Cookie interceptor activated - No session cookies allowed');
+        }
+    }
+    
+    // Call this function immediately
+    preventSessionCookieCreation();
+    
+    // === MODIFY YOUR setTranslateLang FUNCTION ===
+    // Replace your setTranslateLang function with this version
+    function setTranslateLang(lang) {
+        // First, completely clear all existing translation cookies
+        clearAllTranslationCookies();
+        
+        // Specifically check for and remove session cookies
+        detectAndRemoveSessionCookies();
+        
+        // Add a small delay to ensure cookies are cleared
+        setTimeout(() => {
+            const val = "/en/" + lang;
+            const name = "googtrans";
+            
+            // ALWAYS SET AS PERSISTENT COOKIE - NEVER SESSION
+            const domain = location.hostname;
+            const maxAge = 60 * 60 * 24 * 30; // 30 days
+            
+            // Clear any possible session cookie first
+            document.cookie = `${name}=; path=/; domain=${domain}`;
+            document.cookie = `${name}=; path=/; domain=.${domain}`;
+            
+            // Set PERSISTENT cookie only
+            let cookieString = `${name}=${val}; path=/; max-age=${maxAge}; samesite=lax`;
+            
+            // Add domain
+            if (domain && !domain.includes('localhost') && !domain.includes('127.0.0.1')) {
+                cookieString += `; domain=.${domain}`;
+            }
+            
+            document.cookie = cookieString;
+            
+            // Also set without subdomain
+            document.cookie = `${name}=${val}; path=/; max-age=${maxAge}; samesite=lax`;
+            
+            console.log(`✅ Set PERSISTENT cookie: ${name}=${val} (Expires: 30 days)`);
+            
+            // Store in localStorage as backup
+            localStorage.setItem('googtrans', val);
+            
+            // Force page reload with cache busting
+            setTimeout(() => {
+                window.location.href = window.location.pathname + '?t=' + Date.now();
+            }, 100);
+            
+        }, 50);
+    }
+    
+    // === ADD PERIODIC CHECK FOR SESSION COOKIES ===
+    // Check every 2 seconds for session cookies and remove them
+    setInterval(function() {
+        const cookies = document.cookie.split('; ');
+        cookies.forEach(cookie => {
+            if (cookie.trim().startsWith('googtrans=')) {
+                // Get full cookie string
+                const fullCookie = cookie + '; ' + document.cookie;
+                
+                // Check if it's a session cookie
+                if (!fullCookie.includes('expires=') && !fullCookie.includes('max-age=')) {
+                    console.log('⏰ Periodic check: Found SESSION cookie, removing...');
+                    
+                    // Get the value
+                    const match = cookie.match(/googtrans=(.+)/);
+                    if (match && match[1]) {
+                        const value = match[1];
+                        const hostname = window.location.hostname;
+                        
+                        // Remove session cookie
+                        document.cookie = `googtrans=; path=/; domain=${hostname}`;
+                        document.cookie = `googtrans=; path=/; domain=.${hostname}`;
+                        
+                        // Set as persistent
+                        const maxAge = 60 * 60 * 24 * 30;
+                        document.cookie = `googtrans=${value}; path=/; domain=${hostname}; max-age=${maxAge}`;
+                        document.cookie = `googtrans=${value}; path=/; domain=.${hostname}; max-age=${maxAge}`;
+                    }
+                }
+            }
+        });
+    }, 2000); // Check every 2 seconds
+    
+    // === MODIFY DOMContentLoaded EVENT ===
+    // Update your existing DOMContentLoaded event
+    window.addEventListener('DOMContentLoaded', function() {
+        // Clear any session cookies immediately on load
+        detectAndRemoveSessionCookies();
+        
+        // Update button
+        updateToggleButton();
+        
+        // Add click listener to toggle button
+        const toggleBtn = document.getElementById('toggleLangBtn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', toggleLanguage);
+        }
+        
+        // Check and apply language class
+        const settingsWrap = document.querySelector(".settings-btn-wrap");
+        if (settingsWrap) {
+            const lang = getCurrentLang();
+            if (lang === "hi") {
+                settingsWrap.classList.add("hi-lang");
+                console.log("Added hi-lang class");
+            } else {
+                settingsWrap.classList.remove("hi-lang");
+            }
+        }
+        
+        // Monitor for Google Translate completion
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    const target = mutation.target;
+                    if (target.classList.contains('translated-ltr') || 
+                        target.classList.contains('translated-rtl')) {
+                        updateToggleButton();
+                        
+                        // Check for session cookies after translation
+                        setTimeout(detectAndRemoveSessionCookies, 500);
+                    }
+                }
+            });
+        });
+        
+        if (document.body) {
+            observer.observe(document.body, { attributes: true });
+        }
+        
+        // Check if translation stuck in Hindi
+        setTimeout(() => {
+            const lang = getCurrentLang();
+            const bodyHasTranslation = document.body.classList.contains('translated-ltr') || 
+                                      document.body.classList.contains('translated-rtl');
+            
+            if (lang === 'en' && bodyHasTranslation) {
+                console.log('Translation stuck detected, resetting...');
+                resetToEnglish();
+            }
+            
+            // Final check for session cookies
+            detectAndRemoveSessionCookies();
+        }, 3000);
+    });
 
+    // === KEEP THE REST OF YOUR EXISTING CODE AS IS ===
+    // Your existing functions remain the same...
     // Function to get cookie by name
     function getCookie(name) {
         const cookies = document.cookie.split("; ");
@@ -2148,45 +2387,6 @@
         }
         
         console.log('All translation cookies cleared');
-    }
-
-    // Function to set language with proper cookie handling
-    function setTranslateLang(lang) {
-        // First, completely clear all existing translation cookies
-        clearAllTranslationCookies();
-        
-        // Add a small delay to ensure cookies are cleared
-        setTimeout(() => {
-            const val = "/en/" + lang;
-            const name = "googtrans";
-            
-            // Set main cookie with proper domain
-            const domain = location.hostname;
-            const isLocalhost = domain.includes('localhost') || domain.includes('127.0.0.1');
-            
-            let cookieString = `${name}=${val}; path=/; max-age=${60 * 60 * 24 * 30}; samesite=lax`;
-            
-            // Only add domain if not localhost
-            if (!isLocalhost) {
-                cookieString += `; domain=.${domain}`;
-            }
-            
-            document.cookie = cookieString;
-            
-            console.log(`Set ${name} to ${val} for domain ${domain}`);
-            
-            // Also set without subdomain
-            document.cookie = `${name}=${val}; path=/; max-age=${60 * 60 * 24 * 30}; samesite=lax`;
-            
-            // Store in localStorage as backup
-            localStorage.setItem('googtrans', val);
-            
-            // Force page reload with cache busting
-            setTimeout(() => {
-                window.location.href = window.location.pathname + '?t=' + Date.now();
-            }, 100);
-            
-        }, 50);
     }
 
     // Function to reset translation to English
@@ -2286,59 +2486,6 @@
             setTranslateLang(newLang);
         }
     }
-
-    // Initialize on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        // Update button
-        updateToggleButton();
-        
-        // Add click listener to toggle button
-        const toggleBtn = document.getElementById('toggleLangBtn');
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', toggleLanguage);
-        }
-        
-        // Check and apply language class
-        const settingsWrap = document.querySelector(".settings-btn-wrap");
-        if (settingsWrap) {
-            const lang = getCurrentLang();
-            if (lang === "hi") {
-                settingsWrap.classList.add("hi-lang");
-                console.log("Added hi-lang class");
-            } else {
-                settingsWrap.classList.remove("hi-lang");
-            }
-        }
-        
-        // Monitor for Google Translate completion
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class') {
-                    const target = mutation.target;
-                    if (target.classList.contains('translated-ltr') || 
-                        target.classList.contains('translated-rtl')) {
-                        updateToggleButton();
-                    }
-                }
-            });
-        });
-        
-        if (document.body) {
-            observer.observe(document.body, { attributes: true });
-        }
-        
-        // Check if translation stuck in Hindi
-        setTimeout(() => {
-            const lang = getCurrentLang();
-            const bodyHasTranslation = document.body.classList.contains('translated-ltr') || 
-                                      document.body.classList.contains('translated-rtl');
-            
-            if (lang === 'en' && bodyHasTranslation) {
-                console.log('Translation stuck detected, resetting...');
-                resetToEnglish();
-            }
-        }, 3000);
-    });
 
     // Add CSS to handle translation issues
     const style = document.createElement('style');
