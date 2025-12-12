@@ -2088,9 +2088,9 @@
     });
 </script> -->
 <script>
-    // Function to erase cookies by name and domain
-    function eraseCookie(name, domain) {
-        // Delete for all possible paths and variations
+    // Function to erase cookies by name, value, and domain
+    function eraseCookie(name, value, domain) {
+        // Delete for all possible paths and variations if the value matches
         const domains = [
             domain,
             '.' + domain,
@@ -2101,38 +2101,44 @@
         const paths = ['/', '/', ''];
         const expiration = 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
         
-        // Clear all possible variations
-        domains.forEach(dom => {
-            paths.forEach(path => {
-                document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom};`;
-                document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom}; secure;`;
-                document.cookie = `${name}=; ${expiration} path=${path}; domain=${dom}; samesite=lax;`;
+        // Clear the cookie only if the value matches
+        if (document.cookie.includes(`${name}=${value}`)) {
+            domains.forEach(dom => {
+                paths.forEach(path => {
+                    document.cookie = `${name}=${value}; ${expiration} path=${path}; domain=${dom};`;
+                    document.cookie = `${name}=${value}; ${expiration} path=${path}; domain=${dom}; secure;`;
+                    document.cookie = `${name}=${value}; ${expiration} path=${path}; domain=${dom}; samesite=lax;`;
+                });
             });
-        });
-        
-        console.log(`Cookies for ${name} cleared`);
+            
+            console.log(`Cookie ${name} with value ${value} cleared`);
+        }
     }
 
-    // Function to get cookie by name
-    function getCookie(name) {
-        const cookies = document.cookie.split("; ");
-        for (let c of cookies) {
-            const [key, value] = c.split("=");
-            if (key === name) return decodeURIComponent(value || '');
-        }
-        return null;
+    // Function to clear specific 'googtrans' cookie with value '/en/hi'
+    function clearSpecificGoogtransCookie() {
+        const cookieName = 'googtrans';
+        const cookieValue = '/en/hi';
+        eraseCookie(cookieName, cookieValue, location.hostname);
+        eraseCookie(cookieName, cookieValue, '.' + location.hostname);
+        eraseCookie(cookieName, cookieValue, window.location.host);
+        
+        console.log(`Specific cookie ${cookieName} with value ${cookieValue} cleared`);
     }
 
     // Function to completely clear all translation cookies and state
     function clearAllTranslationCookies() {
-        // Clear all Google translate related cookies
+        // Clear all Google translate related cookies except for '/en/hi'
         const cookiesToClear = ['googtrans', 'googtrans_prev', 'googtrans_debug'];
         
         cookiesToClear.forEach(cookieName => {
-            eraseCookie(cookieName, location.hostname);
-            eraseCookie(cookieName, '.' + location.hostname);
-            eraseCookie(cookieName, window.location.host);
+            eraseCookie(cookieName, '', location.hostname);  // Clear cookies by name
+            eraseCookie(cookieName, '', '.' + location.hostname);
+            eraseCookie(cookieName, '', window.location.host);
         });
+        
+        // Clear the specific 'googtrans' cookie with '/en/hi' value
+        clearSpecificGoogtransCookie();
         
         // Also clear localStorage and sessionStorage entries
         localStorage.removeItem('googtrans');
@@ -2254,39 +2260,6 @@
         }
     }
 
-    // Get current language from cookie
-    function getCurrentLang() {
-        const cookie = getCookie('googtrans');
-        if (!cookie) return 'en';
-        
-        const match = cookie.match(/\/en\/(hi|en)/);
-        return match ? match[1] : 'en';
-    }
-
-    // Update toggle button
-    function updateToggleButton() {
-        const lang = getCurrentLang();
-        const toggleBtn = document.getElementById('toggleLangBtn');
-        if (toggleBtn) {
-            toggleBtn.textContent = (lang === 'en') ? 'Hindi' : 'English';
-            toggleBtn.setAttribute('data-current-lang', lang);
-        }
-    }
-
-    // Main toggle function
-    function toggleLanguage() {
-        const currentLang = getCurrentLang();
-        const newLang = (currentLang === 'en') ? 'hi' : 'en';
-        
-        if (newLang === 'en') {
-            // When switching to English, do a complete reset
-            resetToEnglish();
-        } else {
-            // When switching to Hindi, set the cookie
-            setTranslateLang(newLang);
-        }
-    }
-
     // Initialize on page load
     window.addEventListener('DOMContentLoaded', function() {
         // Update button
@@ -2297,70 +2270,7 @@
         if (toggleBtn) {
             toggleBtn.addEventListener('click', toggleLanguage);
         }
-        
-        // Check and apply language class
-        const settingsWrap = document.querySelector(".settings-btn-wrap");
-        if (settingsWrap) {
-            const lang = getCurrentLang();
-            if (lang === "hi") {
-                settingsWrap.classList.add("hi-lang");
-                console.log("Added hi-lang class");
-            } else {
-                settingsWrap.classList.remove("hi-lang");
-            }
-        }
-        
-        // Monitor for Google Translate completion
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.attributeName === 'class') {
-                    const target = mutation.target;
-                    if (target.classList.contains('translated-ltr') || 
-                        target.classList.contains('translated-rtl')) {
-                        updateToggleButton();
-                    }
-                }
-            });
-        });
-        
-        if (document.body) {
-            observer.observe(document.body, { attributes: true });
-        }
-        
-        // Check if translation stuck in Hindi
-        setTimeout(() => {
-            const lang = getCurrentLang();
-            const bodyHasTranslation = document.body.classList.contains('translated-ltr') || 
-                                      document.body.classList.contains('translated-rtl');
-            
-            if (lang === 'en' && bodyHasTranslation) {
-                console.log('Translation stuck detected, resetting...');
-                resetToEnglish();
-            }
-        }, 3000);
     });
-
-    // Add CSS to handle translation issues
-    const style = document.createElement('style');
-    style.textContent = `
-        .goog-te-banner-frame.skiptranslate {
-            display: none !important;
-        }
-        body {
-            top: 0px !important;
-        }
-        .goog-tooltip {
-            display: none !important;
-        }
-        .goog-te-banner-frame {
-            display: none !important;
-        }
-        #google_translate_element {
-            display: none;
-        }
-    `;
-    document.head.appendChild(style);
-
 </script>
 
 <!-- Include the Google Translate API -->
